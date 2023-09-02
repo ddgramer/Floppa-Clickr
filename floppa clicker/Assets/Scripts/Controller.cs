@@ -119,11 +119,7 @@ public class Controller : MonoBehaviour
         
         rigidBody.AddForce(inputAndY, ForceMode.Force);// add inputAndY amount of force to the player
 
-
-        Debug.Log(rigidBody.velocity.y);
         float speed = Vector3.Magnitude(rigidBody.velocity);// calculate current object speed
-
-        //Debug.Log(speed);
 
         //if the player's speed is higher than max speed pass
         if (speed > maxSpeed)
@@ -189,7 +185,7 @@ public class Controller : MonoBehaviour
         }
 
         // if the player isn't on ground and hasShiftPos and is pressing shift set isFloating to true
-        if (!GroundChecks().Item1 && hasShiftYPos && Input.GetKey(KeyCode.LeftShift))
+        if (!GroundChecks().Item1 && hasShiftYPos && Input.GetKey(KeyCode.LeftShift) && jumped == 0)
         {
             isFloating = true;
         }
