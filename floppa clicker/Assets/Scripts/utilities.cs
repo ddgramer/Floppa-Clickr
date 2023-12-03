@@ -1,8 +1,11 @@
 using UnityEngine;
 
+
+
 public class Utilities : MonoBehaviour
 {
     #region downToOne
+
     //rounds the numbers to -1, 0, 1
 
     public static Vector3 DownToOne(Vector3 toRound)
@@ -70,6 +73,7 @@ public class Utilities : MonoBehaviour
 
         return rounded;
     }
+
     public static int DownToOne(int toRound)
     {
         int rounded;
@@ -89,9 +93,11 @@ public class Utilities : MonoBehaviour
 
         return rounded;
     }
-    #endregion
+
+    #endregion downToOne
 
     #region moved
+
     public static bool Moved(float one, float two, float lastOne, float lastTwo, float maxDistance)
     {
         if (one >= lastOne + maxDistance)
@@ -115,5 +121,35 @@ public class Utilities : MonoBehaviour
             return false;
         }
     }
-    #endregion
+
+    #endregion moved
+
+    #region miscelaneous
+
+    public static Vector3 RemoveY(Vector3 toRemove, bool removeOrNot)
+    {
+        Vector3 removed;
+
+        if (removeOrNot)
+        {
+            removed = new Vector3(toRemove.x, 0f, toRemove.y);
+        }
+        else
+        {
+            removed = toRemove;
+        }
+
+        return removed;
+    }
+
+    public static Vector3 RemoveY(Vector3 toRemove)
+    {
+        Vector3 removed;
+
+        removed = new Vector3(toRemove.x, 0f, toRemove.y);
+
+        return removed;
+    }
+
+    #endregion miscelaneous
 }
