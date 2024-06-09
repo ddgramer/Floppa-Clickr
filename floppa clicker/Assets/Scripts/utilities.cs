@@ -1,8 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-
-
-public class Utilities : MonoBehaviour
+public class Utilities
 {
     #region downToOne
 
@@ -12,43 +11,21 @@ public class Utilities : MonoBehaviour
     {
         Vector3 rounded = new Vector3(0, 0, 0);
 
-        if (toRound.x > 0)
+        for (int i = 0; i < 3; i++)
         {
-            rounded.x = 1;
-        }
-        else if (toRound.x < 0)
-        {
-            rounded.x = -1;
-        }
-        else
-        {
-            rounded.x = 0;
-        }
+            if (toRound[i] > 0)
+            {
+                rounded[i] = 1;
+            }
+            else if (toRound[i] < 0)
+            {
+                rounded[i] = -1;
+            }
+            else
+            {
+                rounded[i] = 0;
+            }
 
-        if (toRound.y > 0)
-        {
-            rounded.y = 1;
-        }
-        else if (toRound.y < 0)
-        {
-            rounded.y = -1;
-        }
-        else
-        {
-            rounded.y = 0;
-        }
-
-        if (toRound.z > 0)
-        {
-            rounded.z = 1;
-        }
-        else if (toRound.z < 0)
-        {
-            rounded.z = -1;
-        }
-        else
-        {
-            rounded.z = 0;
         }
 
         return rounded;
@@ -121,35 +98,57 @@ public class Utilities : MonoBehaviour
             return false;
         }
     }
-
-    #endregion moved
-
-    #region miscelaneous
-
-    public static Vector3 RemoveY(Vector3 toRemove, bool removeOrNot)
+    public static bool Moved(Vector2 current, Vector2 previous, float maxDistance)
     {
-        Vector3 removed;
-
-        if (removeOrNot)
+        if (current.x >= previous.x + maxDistance)
         {
-            removed = new Vector3(toRemove.x, 0f, toRemove.y);
+            return true;
+        }
+        else if (current.x <= previous.x - maxDistance)
+        {
+            return true;
+        }
+        else if (current.y >= previous.y + maxDistance)
+        {
+            return true;
+        }
+        else if (current.y <= previous.y - maxDistance)
+        {
+            return true;
         }
         else
         {
-            removed = toRemove;
+            return false;
         }
-
-        return removed;
     }
+
+    #endregion moved
+
+    #region Vector3manipulation
 
     public static Vector3 RemoveY(Vector3 toRemove)
     {
-        Vector3 removed;
-
-        removed = new Vector3(toRemove.x, 0f, toRemove.y);
-
-        return removed;
+        return new Vector3(toRemove.x, 0f, toRemove.z);
     }
 
-    #endregion miscelaneous
+    public static Vector3 RemoveY(Vector3 toRemove, bool removeOrNot)
+    {
+        if (removeOrNot)
+        {
+            return new Vector3(toRemove.x, 0f, toRemove.z);
+        }
+        else
+        {
+            return toRemove;
+        }
+    }
+
+    public static Vector3 InsertY(Vector3 toInsertTo, float toInsert)
+    {
+        return new Vector3(toInsertTo.x, toInsert, toInsertTo.z);
+    }
+
+
+
+    #endregion Vector3manipulation
 }
